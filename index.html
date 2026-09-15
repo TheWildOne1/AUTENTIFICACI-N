@@ -38,8 +38,6 @@ backdrop-filter:blur(2px);
 z-index:-1;
 }
 
-/* PANTALLA 1 */
-
 #home{
 height:100vh;
 display:flex;
@@ -55,7 +53,6 @@ gap:4px;
 width:560px;
 max-width:90%;
 display:block;
-margin:0;
 }
 
 .brand{
@@ -63,13 +60,11 @@ font-size:56px;
 font-weight:900;
 letter-spacing:4px;
 line-height:1;
-margin:0;
 }
 
 .subtitle{
 font-size:18px;
 opacity:.85;
-margin:0;
 }
 
 .btn{
@@ -88,8 +83,6 @@ transition:.3s;
 .btn:hover{
 transform:scale(1.05);
 }
-
-/* PANTALLA 2 */
 
 #verify{
 display:none;
@@ -232,8 +225,6 @@ font-size:56px;
 
 <div class="overlay"></div>
 
-<!-- PANTALLA 1 -->
-
 <div id="home">
 
 <img
@@ -253,8 +244,6 @@ Verificar Producto
 </button>
 
 </div>
-
-<!-- PANTALLA 2 -->
 
 <div id="verify">
 
@@ -289,6 +278,16 @@ La autenticidad de este producto ha sido validada correctamente.
 <div class="line"></div>
 
 <div class="counterLabel">
+PRECIO
+</div>
+
+<div class="counter">
+$15,000
+</div>
+
+<div class="line"></div>
+
+<div class="counterLabel">
 VERIFICACIONES
 </div>
 
@@ -315,25 +314,21 @@ Verificado
 
 function showVerification(){
 
-const music = document.getElementById("bgMusic");
+const music=document.getElementById("bgMusic");
 
-music.volume = 0.7;
+music.volume=0.7;
 music.play();
 
-document.getElementById("home").style.display = "none";
-document.getElementById("verify").style.display = "block";
+document.getElementById("home").style.display="none";
+document.getElementById("verify").style.display="block";
 
-let count = localStorage.getItem("wildart_counter");
+let count=localStorage.getItem("wildart_counter");
 
-if(!count){
-count = 1;
-}else{
-count = parseInt(count) + 1;
-}
+count=!count?1:parseInt(count)+1;
 
-localStorage.setItem("wildart_counter", count);
+localStorage.setItem("wildart_counter",count);
 
-document.getElementById("count").innerText =
+document.getElementById("count").innerText=
 Number(count).toLocaleString();
 
 }
