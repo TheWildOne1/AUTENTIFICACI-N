@@ -1,339 +1,302 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>The Wild Art | Verificación Oficial</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-<style>
+  <title>GivenchyFarms</title>
 
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display",sans-serif;
-}
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
 
-body{
-background:#000;
-color:#fff;
-overflow:hidden;
-}
+    html,
+    body {
+      width: 100%;
+      height: 100%;
+      background: white;
+      overflow: hidden;
+      font-family: Arial, Helvetica, sans-serif;
+    }
 
-video{
-position:fixed;
-top:0;
-left:0;
-width:100%;
-height:100%;
-object-fit:cover;
-z-index:-2;
-}
+    /* PANTALLA INICIAL */
+    #startScreen {
+      width: 100vw;
+      height: 100vh;
+      background: white;
 
-.overlay{
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.55);
-backdrop-filter:blur(2px);
-z-index:-1;
-}
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
 
-#home{
-height:100vh;
-display:flex;
-flex-direction:column;
-justify-content:center;
-align-items:center;
-text-align:center;
-padding:20px;
-gap:4px;
-}
+      position: fixed;
+      inset: 0;
+      z-index: 10;
+    }
 
-.mainGif{
-width:560px;
-max-width:90%;
-display:block;
-}
+    .top-image {
+      width: 75vw;
+      max-width: 300px;
 
-.brand{
-font-size:56px;
-font-weight:900;
-letter-spacing:4px;
-line-height:1;
-}
+      animation: dance 2.2s ease-in-out infinite;
 
-.subtitle{
-font-size:18px;
-opacity:.85;
-}
+      user-select: none;
+      -webkit-user-drag: none;
 
-.btn{
-margin-top:12px;
-border:none;
-background:#fff;
-color:#000;
-padding:18px 50px;
-border-radius:50px;
-font-size:17px;
-font-weight:700;
-cursor:pointer;
-transition:.3s;
-}
+      margin-bottom: 35px;
+    }
 
-.btn:hover{
-transform:scale(1.05);
-}
+    /* BOTÓN */
+    #startButton {
+      border: none;
+      outline: none;
 
-#verify{
-display:none;
-height:100vh;
-overflow-y:auto;
-padding:30px 20px 80px;
-text-align:center;
-}
+      background: #000;
+      color: white;
 
-.cornerGif{
-position:fixed;
-top:20px;
-right:20px;
-width:150px;
-z-index:999;
-}
+      font-size: 18px;
+      font-weight: bold;
 
-.brandVerify{
-margin-top:40px;
-font-size:52px;
-font-weight:900;
-letter-spacing:4px;
-}
+      padding: 16px 42px;
 
-.productImg{
-width:420px;
-max-width:90%;
-border-radius:22px;
-margin-top:18px;
-border:1px solid rgba(255,255,255,.08);
-}
+      border-radius: 12px;
 
-.authBox{
-max-width:560px;
-margin:25px auto;
-background:rgba(15,15,15,.82);
-backdrop-filter:blur(20px);
-border:1px solid rgba(255,255,255,.08);
-border-radius:30px;
-padding:35px;
-}
+      cursor: pointer;
 
-.verifyBadge{
-width:220px;
-max-width:70%;
-margin-bottom:20px;
-border-radius:18px;
-}
+      -webkit-tap-highlight-color: transparent;
 
-.check{
-font-size:65px;
-color:#00d26a;
-}
+      box-shadow: 0 6px 18px rgba(0,0,0,.2);
 
-.authTitle{
-font-size:34px;
-font-weight:800;
-margin-top:10px;
-}
+      transition: transform .15s ease;
+    }
 
-.desc{
-margin-top:12px;
-line-height:1.6;
-opacity:.82;
-}
+    #startButton:active {
+      transform: scale(.92);
+    }
 
-.line{
-height:1px;
-background:rgba(255,255,255,.08);
-margin:24px 0;
-}
+    /* VIDEO */
+    #content {
+      display: none;
 
-.counterLabel{
-font-size:13px;
-letter-spacing:3px;
-opacity:.65;
-}
+      position: fixed;
+      inset: 0;
 
-.counter{
-font-size:72px;
-font-weight:900;
-margin-top:10px;
-}
+      width: 100vw;
+      height: 100vh;
 
-.status{
-margin-top:10px;
-font-size:18px;
-font-weight:700;
-color:#00d26a;
-}
+      background: black;
 
-.dot{
-display:inline-block;
-width:10px;
-height:10px;
-background:#00d26a;
-border-radius:50%;
-margin-right:8px;
-}
+      z-index: 5;
+    }
 
-@media(max-width:768px){
+    #mainVideo {
+      position: absolute;
 
-.mainGif{
-width:360px;
-}
+      top: 0;
+      left: 0;
 
-.brand{
-font-size:42px;
-}
+      width: 100vw;
+      height: 100vh;
 
-.brandVerify{
-font-size:38px;
-}
+      object-fit: cover;
 
-.productImg{
-width:280px;
-}
+      display: block;
 
-.verifyBadge{
-width:170px;
-}
+      background: black;
+    }
 
-.cornerGif{
-width:100px;
-}
+    /* VERIFICACIÓN */
+    .verification {
+      position: absolute;
 
-.counter{
-font-size:56px;
-}
+      left: 0;
+      right: 0;
+      bottom: 25px;
 
-}
+      z-index: 3;
 
-</style>
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      text-align: center;
+
+      pointer-events: none;
+    }
+
+    /* IMAGEN MÁS GRANDE */
+    .bottom-image {
+      width: 190px;
+
+      animation: dance 2.2s ease-in-out infinite;
+
+      user-select: none;
+      -webkit-user-drag: none;
+
+      margin-bottom: 12px;
+    }
+
+    /* TEXTO MÁS GRANDE */
+    .verified {
+      font-size: 20px;
+      font-weight: 800;
+
+      color: white;
+
+      text-shadow:
+        0 2px 6px rgba(0,0,0,.9),
+        0 0 10px rgba(0,0,0,.7);
+    }
+
+    .verified span {
+      color: #d00000;
+    }
+
+    /* ANIMACIÓN */
+    @keyframes dance {
+
+      0% {
+        transform: translateY(0) rotate(-2deg) scale(1);
+      }
+
+      25% {
+        transform: translateY(-10px) rotate(3deg) scale(1.04);
+      }
+
+      50% {
+        transform: translateY(0) rotate(-2deg) scale(1);
+      }
+
+      75% {
+        transform: translateY(10px) rotate(3deg) scale(1.04);
+      }
+
+      100% {
+        transform: translateY(0) rotate(-2deg) scale(1);
+      }
+
+    }
+
+    @media (max-width: 430px) {
+
+      .top-image {
+        width: 70vw;
+      }
+
+      #startButton {
+        font-size: 17px;
+        padding: 15px 38px;
+      }
+
+      .bottom-image {
+        width: 175px;
+      }
+
+      .verified {
+        font-size: 19px;
+      }
+
+    }
+  </style>
 </head>
+
 <body>
 
-<video autoplay muted loop playsinline>
-<source src="https://files.catbox.moe/kcbele.mp4" type="video/mp4">
-</video>
+  <!-- PANTALLA INICIAL -->
+  <div id="startScreen">
 
-<div class="overlay"></div>
+    <img
+      class="top-image"
+      src="https://files.catbox.moe/rv3ggc.png"
+      alt=""
+    >
 
-<div id="home">
+    <button id="startButton">
+      Pre-Roll
+    </button>
 
-<img
-src="https://files.catbox.moe/fnmcpj.gif"
-class="mainGif">
+  </div>
 
-<div class="brand">
-THE WILD ART
-</div>
 
-<div class="subtitle">
-Certificado Oficial de Autenticidad
-</div>
+  <!-- VIDEO -->
+  <div id="content">
 
-<button class="btn" onclick="showVerification()">
-Verificar Producto
-</button>
+    <video
+      id="mainVideo"
+      src="https://files.catbox.moe/adl2kc.mov"
+      playsinline
+      webkit-playsinline
+      loop
+      preload="auto"
+    ></video>
 
-</div>
 
-<div id="verify">
+    <!-- VERIFICACIÓN -->
+    <div class="verification">
 
-<img
-src="https://files.catbox.moe/fnmcpj.gif"
-class="cornerGif">
+      <img
+        class="bottom-image"
+        src="https://files.catbox.moe/nm2lb6.png"
+        alt=""
+      >
 
-<h1 class="brandVerify">
-THE WILD ART
-</h1>
+      <div class="verified">
+        Producto verificado de
+        <span>GivenchyFarms</span>
+      </div>
 
-<img
-src="https://files.catbox.moe/bvrnej.jpeg"
-class="productImg">
+    </div>
 
-<div class="authBox">
+  </div>
 
-<img
-src="https://files.catbox.moe/7iq5tr.jpeg"
-class="verifyBadge">
 
-<div class="check">✓</div>
+  <!-- MÚSICA -->
+  <audio
+    id="music"
+    src="https://files.catbox.moe/l2cu1b.mp3"
+    loop
+    preload="auto"
+  ></audio>
 
-<div class="authTitle">
-Producto Auténtico
-</div>
 
-<div class="desc">
-La autenticidad de este producto ha sido validada correctamente.
-</div>
+  <script>
 
-<div class="line"></div>
+    const button = document.getElementById("startButton");
+    const startScreen = document.getElementById("startScreen");
+    const content = document.getElementById("content");
 
-<div class="counterLabel">
-PRECIO
-</div>
+    const video = document.getElementById("mainVideo");
+    const music = document.getElementById("music");
 
-<div class="counter">
-$15,000
-</div>
 
-<div class="line"></div>
+    button.addEventListener("click", async function () {
 
-<div class="counterLabel">
-VERIFICACIONES
-</div>
+      startScreen.style.display = "none";
 
-<div class="counter" id="count">
-0
-</div>
+      content.style.display = "block";
 
-<div class="line"></div>
+      video.currentTime = 0;
+      music.currentTime = 0;
 
-<div class="status">
-<span class="dot"></span>
-Verificado
-</div>
+      try {
+        await video.play();
+      } catch (error) {
+        console.log("Video:", error);
+      }
 
-</div>
+      try {
+        await music.play();
+      } catch (error) {
+        console.log("Audio:", error);
+      }
 
-</div>
+    });
 
-<audio id="bgMusic" loop>
-<source src="https://files.catbox.moe/takf9g.mp3" type="audio/mpeg">
-</audio>
-
-<script>
-
-function showVerification(){
-
-const music=document.getElementById("bgMusic");
-
-music.volume=0.7;
-music.play();
-
-document.getElementById("home").style.display="none";
-document.getElementById("verify").style.display="block";
-
-let count=localStorage.getItem("wildart_counter");
-
-count=!count?1:parseInt(count)+1;
-
-localStorage.setItem("wildart_counter",count);
-
-document.getElementById("count").innerText=
-Number(count).toLocaleString();
-
-}
-
-</script>
+  </script>
 
 </body>
 </html>
