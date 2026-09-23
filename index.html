@@ -22,7 +22,6 @@
       font-family: Arial, Helvetica, sans-serif;
     }
 
-    /* PANTALLA INICIAL */
     #startScreen {
       width: 100vw;
       height: 100vh;
@@ -50,7 +49,6 @@
       margin-bottom: 35px;
     }
 
-    /* BOTÓN */
     #startButton {
       border: none;
       outline: none;
@@ -78,7 +76,6 @@
       transform: scale(.92);
     }
 
-    /* VIDEO */
     #content {
       display: none;
 
@@ -109,7 +106,6 @@
       background: black;
     }
 
-    /* VERIFICACIÓN */
     .verification {
       position: absolute;
 
@@ -128,7 +124,6 @@
       pointer-events: none;
     }
 
-    /* IMAGEN MÁS GRANDE */
     .bottom-image {
       width: 190px;
 
@@ -140,7 +135,6 @@
       margin-bottom: 12px;
     }
 
-    /* TEXTO MÁS GRANDE */
     .verified {
       font-size: 20px;
       font-weight: 800;
@@ -156,9 +150,7 @@
       color: #d00000;
     }
 
-    /* ANIMACIÓN */
     @keyframes dance {
-
       0% {
         transform: translateY(0) rotate(-2deg) scale(1);
       }
@@ -178,11 +170,9 @@
       100% {
         transform: translateY(0) rotate(-2deg) scale(1);
       }
-
     }
 
     @media (max-width: 430px) {
-
       .top-image {
         width: 70vw;
       }
@@ -199,7 +189,6 @@
       .verified {
         font-size: 19px;
       }
-
     }
   </style>
 </head>
@@ -211,7 +200,7 @@
 
     <img
       class="top-image"
-      src="https://files.catbox.moe/rv3ggc.png"
+      src="https://files.catbox.moe/5wv27a.png"
       alt=""
     >
 
@@ -233,7 +222,6 @@
       loop
       preload="auto"
     ></video>
-
 
     <!-- VERIFICACIÓN -->
     <div class="verification">
@@ -264,7 +252,6 @@
 
 
   <script>
-
     const button = document.getElementById("startButton");
     const startScreen = document.getElementById("startScreen");
     const content = document.getElementById("content");
@@ -272,11 +259,9 @@
     const video = document.getElementById("mainVideo");
     const music = document.getElementById("music");
 
-
     button.addEventListener("click", async function () {
 
       startScreen.style.display = "none";
-
       content.style.display = "block";
 
       video.currentTime = 0;
@@ -295,7 +280,6 @@
       }
 
     });
-
   </script>
 
 </body>
